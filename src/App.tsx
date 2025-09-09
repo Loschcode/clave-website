@@ -10,7 +10,7 @@ function App() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Header/Hero with parallax background and overlaid text */}
       <section
-        className="relative w-full h-[45vh] md:h-[60vh] bg-fixed bg-cover bg-center"
+        className="relative w-full h-[45vh] h-[45svh] md:h-[60vh] bg-cover bg-center md:bg-fixed overflow-hidden"
         style={{ backgroundImage: "url(/images/hero-logo.jpg)" }}
       >
         <div className="absolute inset-0 bg-black/40" />
