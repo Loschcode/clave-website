@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import type { HTMLAttributes } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 
 type Direction = 'up' | 'down' | 'left' | 'right'
 
-interface RevealProps extends React.HTMLAttributes<HTMLDivElement> {
+interface RevealProps extends HTMLAttributes<HTMLDivElement> {
   direction?: Direction
   delayMs?: number
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof HTMLElementTagNameMap
 }
 
 export function Reveal({
@@ -51,4 +52,3 @@ export function Reveal({
     </Comp>
   )
 }
-
