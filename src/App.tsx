@@ -10,11 +10,11 @@ function App() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Header/Hero with parallax background and overlaid text */}
       <section
-        className="relative w-full h-[45vh] h-[45svh] md:h-[60vh] bg-cover bg-center md:bg-fixed overflow-hidden"
+        className="relative w-full bg-cover bg-center md:bg-fixed overflow-hidden"
         style={{ backgroundImage: "url(/images/hero-logo.jpg)" }}
       >
         <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 max-w-6xl mx-auto px-4 h-full flex flex-col items-center justify-center text-center">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 py-8 sm:py-10 flex flex-col items-center justify-start text-center">
           <Reveal as="p" delayMs={120} direction="up" className="text-sm uppercase tracking-widest text-zinc-200">
             Clave 7 Records
           </Reveal>
@@ -60,7 +60,7 @@ function App() {
           </h1>
           </Reveal>
           <Reveal delayMs={300} direction="up" className="mt-3 flex justify-center">
-            <Badge>Oferta limitada</Badge>
+            <Badge size="xl">Oferta limitada</Badge>
           </Reveal>
           <Reveal as="p" delayMs={380} direction="up" className="mt-4 text-base md:text-lg text-zinc-100/90 max-w-2xl mx-auto">
             Crea tu corrido personalizado en 24h: el regalo perfecto para cumpleaños,
@@ -68,7 +68,7 @@ function App() {
           </Reveal>
           <Reveal delayMs={460} direction="up" className="mt-6">
             <a href="https://tally.so/r/wgz46M" target="_blank" rel="noreferrer">
-              <Button className="text-white" size="lg">Ordena Tu Corrido Ahora</Button>
+              <Button className="text-white" size="xl">Ordena Tu Corrido Ahora</Button>
             </a>
           </Reveal>
         </div>
@@ -129,7 +129,7 @@ function App() {
         </Reveal>
         <Reveal className="mt-8 text-center" direction="up" delayMs={220}>
           <a href="https://tally.so/r/wgz46M" target="_blank" rel="noreferrer">
-            <Button size="lg" className="text-white">Ordena Tu Corrido Ahora</Button>
+            <Button size="xl" className="text-white">Ordena Tu Corrido Ahora</Button>
           </a>
         </Reveal>
       </section>
