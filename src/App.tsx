@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
@@ -6,6 +7,21 @@ import { Reveal } from '@/components/reveal'
 import WhatsAppWidget from '@/components/whatsapp-widget'
 
 function App() {
+  const samples = [
+    { title: 'El Flaco y El Fierros', src: '/El Flaco y El Fierros.mp3' },
+    { title: 'Los Mismos de Siempre', src: '/Los Mismos de Siempre.mp3' },
+    { title: 'Ya ni pa’ qué mentirnos', src: '/Ya ni pa’ qué mentirnos.mp3' },
+  ] as const
+
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  useEffect(() => {
+    if (!audioRef.current) return
+    // Reload the audio source when the track changes
+    audioRef.current.load()
+  }, [currentIndex])
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header/Hero with parallax background and overlaid text */}
@@ -116,16 +132,38 @@ function App() {
       <section className="max-w-6xl mx-auto px-4 py-14">
         <Reveal as="blockquote" className="max-w-3xl mx-auto text-center" direction="up">
           <p className="text-xl md:text-2xl font-medium">
-            “Increíble, superó mis expectativas. Conté mi historia y en 20 horas tenía
-            un corrido hecho a mi medida. ¡100% recomendado!”
+            “Le pedí a Clave 7 un corrido para el cumple de mi hermano. Les conté anécdotas, su apodo y cómo empezó el negocio familiar.
+            En menos de 24 horas teníamos una rola increíble que hizo llorar a todos. Es justo lo que imaginamos.”
           </p>
-          <footer className="mt-2 text-zinc-600">— Carlos M.</footer>
+          <footer className="mt-2 text-zinc-600">— Carlos M. (CDMX)</footer>
         </Reveal>
-        <Reveal className="mt-8 flex justify-center" direction="up" delayMs={120}>
-          <audio controls className="w-full max-w-xl">
-            <source src="https://static1.squarespace.com/static/67bdd21d4aa22431669c06ff/t/67dd4a3325e8be202c281341/1742555702941/Corrido+personalizado+Gabo+y+Teo+Perron.mp3/original/Corrido+personalizado+Gabo+y+Teo+Perron.mp3" type="audio/mpeg" />
-            Tu navegador no soporta audio.
-          </audio>
+        <Reveal className="mt-8" direction="up" delayMs={120}>
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-2 text-sm text-zinc-600">Escucha ejemplos reales</div>
+            <div className="flex flex-wrap gap-2 justify-center">
+              {samples.map((track, i) => (
+                <Button
+                  key={track.src}
+                  variant={i === currentIndex ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => {
+                    setCurrentIndex(i)
+                    // Attempt to play immediately after interaction
+                    setTimeout(() => audioRef.current?.play().catch(() => {}), 0)
+                  }}
+                >
+                  {i === currentIndex ? '▶︎ ' : ''}{track.title}
+                </Button>
+              ))}
+            </div>
+            <div className="mt-4 flex flex-col items-center">
+              <div className="text-sm text-zinc-700 mb-1">Ahora suena: {samples[currentIndex].title}</div>
+              <audio ref={audioRef} controls className="w-full max-w-xl">
+                <source src={samples[currentIndex].src} type="audio/mpeg" />
+                Tu navegador no soporta audio.
+              </audio>
+            </div>
+          </div>
         </Reveal>
         <Reveal className="mt-8 text-center" direction="up" delayMs={220}>
           <a href="https://tally.so/r/wgz46M" target="_blank" rel="noreferrer">
